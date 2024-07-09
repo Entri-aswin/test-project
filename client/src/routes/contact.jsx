@@ -10,6 +10,10 @@ export default function Contact() {
     favorite: true,
   };
 
+  const activeStar = "★";
+  const noActiveStar = "☆";
+  const rating = 3;
+
   return (
     <div id="contact">
       <div>
@@ -20,6 +24,11 @@ export default function Contact() {
             `https://robohash.org/${contact.id}.png?size=200x200`
           }
         />
+      </div>
+
+      <div className="rating">
+        <h2>Rating</h2>
+        {[...Array(5)].map((value,index) => <h5> {index} </h5>)}
       </div>
 
       <div>
@@ -36,10 +45,7 @@ export default function Contact() {
 
         {contact.twitter && (
           <p>
-            <a
-              target="_blank"
-              href={`https://twitter.com/${contact.twitter}`}
-            >
+            <a target="_blank" href={`https://twitter.com/${contact.twitter}`}>
               {contact.twitter}
             </a>
           </p>
@@ -55,11 +61,7 @@ export default function Contact() {
             method="post"
             action="destroy"
             onSubmit={(event) => {
-              if (
-                !confirm(
-                  "Please confirm you want to delete this record."
-                )
-              ) {
+              if (!confirm("Please confirm you want to delete this record.")) {
                 event.preventDefault();
               }
             }}
@@ -79,11 +81,7 @@ function Favorite({ contact }) {
       <button
         name="favorite"
         value={favorite ? "false" : "true"}
-        aria-label={
-          favorite
-            ? "Remove from favorites"
-            : "Add to favorites"
-        }
+        aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
       >
         {favorite ? "★" : "☆"}
       </button>
